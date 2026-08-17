@@ -1,0 +1,5 @@
+name = "UntitledSexualityProject"
+path = "/home/blob/Projects/UntitledSexualityProject"
+repo = "git@github.com:CultOfTheBlob/UntitledSexualityProject.git"
+license = "MIT"
+template_name = "RustSlint"
