@@ -9,11 +9,21 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-slint = { version = "1.16.1", features = ["backend-qt"] }
-genpdf = "0.2.0"
+egui = "0.36.0"
+eframe = { version = "0.36.0", features = ["persistence"] }
+log = "0.4.27"
+serde = { version = "1.0.219", features = ["derive"] }
+printpdf = { version = "0.12.8", features = ["html", "png", "jpeg", "webp"] }
+wasm-bindgen-futures = "0.4.50"
+web-sys = { version = "0.3.70", features = ["Window", "Document", "Element", "HtmlAnchorElement", "Url", "Blob", "BlobPropertyBag"] } 
+js-sys = "0.3.105"
+rfd = "0.17.2"
 
-[build-dependencies]
-slint-build = "1.16.1"
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
 
 [lints.clippy]
 all = { level = "warn", priority = -1 }
@@ -62,7 +72,5 @@ let_underscore_must_use = "allow"
 significant_drop_tightening = "allow"
 
 [lints.rust]
-missing_docs = "warn"
-
 irrefutable_let_patterns = "allow"
 non_snake_case = "allow"

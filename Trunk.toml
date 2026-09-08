@@ -1,0 +1,14 @@
+[build]
+filehash = false
+public_url = "/UntitledSexualityProject/"
+
+[build.compression]
+algorithm = "all"
+
+[tools]
+wasm_opt = "version_116"
+
+[wasm_opt]
+optimization_level = "z"
+enable_all_experiments = true
+args = ["-all", "--enable-bulk-memory"]

@@ -6,18 +6,11 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    naersk = {
-      url = "github:nix-community/naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
-    self,
     nixpkgs,
-    naersk,
     rust-overlay,
     flake-utils,
     ...
@@ -25,47 +18,28 @@
     flake-utils.lib.eachDefaultSystem (system: let
       overlays = [(import rust-overlay)];
       pkgs = import nixpkgs {inherit system overlays;};
-      naerskLib = pkgs.callPackage naersk {};
     in {
-      packages.default = naerskLib.buildPackage {
-        src = self;
-
-        buildInputs = with pkgs; [glib];
-        nativeBuildInputs = with pkgs; [pkg-config makeWrapper fontconfig];
-
-        postInstall = ''
-          wrapProgram $out/bin/UntitledSexualityProject \
-            --prefix LD_LIBRARY_PATH : ${pkgs.lib.makeLibraryPath (with pkgs; [
-            wayland
-            libxkbcommon
-            libGL
-            mesa
-            vulkan-loader
-          ])}
-        '';
-      };
-
       devShells.default = pkgs.mkShell {
         buildInputs = with pkgs; [
-          (rust-bin.nightly."2026-02-01".default.override {
-            extensions = ["rust-src" "rust-analyzer" "clippy" "rustfmt"];
+          (rust-bin.stable.latest.default.override {
+            extensions = [
+              "rust-src"
+              "rust-analyzer"
+              "clippy"
+              "rustfmt"
+            ];
+
+            targets = [
+              "wasm32-unknown-unknown"
+            ];
           })
 
-          slint-lsp
+          openssl
+          pkg-config
+
+          trunk
           just
-
-          glib
         ];
-
-        LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath [
-          pkgs.wayland
-          pkgs.libxkbcommon
-          pkgs.libGL
-          pkgs.mesa
-          pkgs.vulkan-loader
-        ];
-
-        nativeBuildInputs = [pkgs.pkg-config pkgs.fontconfig];
       };
     });
 }

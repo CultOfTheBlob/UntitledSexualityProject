@@ -1,7 +1,7 @@
 default: run
 
 run:
-  @cargo run
+  @trunk serve
 
 fmt:
   @cargo fmt
