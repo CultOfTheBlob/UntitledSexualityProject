@@ -27,18 +27,14 @@ impl Default for App {
 
         Self {
             spectrums: vec![
-                (String::from("Spectrum1"), Spectrum::default()),
-                (String::from("Spectrum2"), Spectrum::default()),
-                (String::from("Spectrum3"), Spectrum::default()),
-                (String::from("Spectrum4"), Spectrum::default()),
-                (String::from("Spectrum5"), Spectrum::default()),
-                (String::from("Spectrum6"), Spectrum::default()),
-                (String::from("Spectrum7"), Spectrum::default()),
-                (String::from("Spectrum8"), Spectrum::default()),
-                (String::from("Spectrum9"), Spectrum::default()),
-                (String::from("Spectrum10"), Spectrum::default()),
-                (String::from("Spectrum11"), Spectrum::default()),
-                (String::from("Spectrum12"), Spectrum::default()),
+                (String::from("Graysexual"), Spectrum::default()),
+                (String::from("Grayromantic"), Spectrum::default()),
+                (String::from("Heterosexual"), Spectrum::default()),
+                (String::from("Heteroromantic"), Spectrum::default()),
+                (String::from("Homosexual"), Spectrum::default()),
+                (String::from("Homoromantic"), Spectrum::default()),
+                (String::from("Pansexual"), Spectrum::default()),
+                (String::from("Panromantic"), Spectrum::default()),
             ],
 
             name: String::new(),
